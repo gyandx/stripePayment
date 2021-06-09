@@ -1,0 +1,73 @@
+<h4 class="text-center" style="color: yellowgreen">Multiple Card Form</h4>
+<form #paymentForm="ngForm" (ngSubmit)="submitPayment(paymentForm)">
+  <div>
+    <label for="name" class="form-label">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="name"
+      ngModel
+      #name="ngModel"
+      required
+    />
+    <p class="help-block" *ngIf="name.invalid && name.touched">Enter Name</p>
+  </div>
+
+  <div>
+    <label for="email" class="form-label">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      ngModel
+      #email="ngModel"
+      email
+      required
+    />
+    <p class="help-block" *ngIf="email.invalid && email.touched">
+      Enter Valid Email
+    </p>
+    <p class="help-block" *ngIf="email.value === '' && email.touched">
+      Email Is Required
+    </p>
+  </div>
+
+  <div>
+    <label for="cc-number" class="form-label">Card Number</label>
+    <div id="cc-number" class="form-control"></div>
+    <p *ngIf="toggleCardNumberError" class="help-block">
+      {{ cardNumberError }}
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <label>Exp. Month & Year <span>*</span></label>
+      <div id="cc-exp-date" class="form-control"></div>
+      <p *ngIf="toggleCardMonthError" class="help-block">
+        {{ cardMonthError }}
+      </p>
+    </div>
+    <div class="col-md-6">
+      <label>CVV<span>*</span></label>
+      <div id="cc-cvc" class="form-control"></div>
+      <p *ngIf="toggleCardCvvError" class="help-block">
+        {{ cardCvvError }}
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <button
+      type="submit"
+      style="width: 100%"
+      class="btn btn-primary"
+      [disabled]="paymentForm.invalid"
+    >
+      Payment
+      <i *ngIf="paymentLoading" class="fas fa-spinner fa-spin"></i>
+    </button>
+  </div>
+</form>

@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="content-wrapper w-50 m-auto">
+    <h4 class="text-center">Stripe Payment Implementation</h4>
+    <ul>
+      <li>
+        In index.html paste the stripe script i.e refer to index.html file
+      </li>
+      <li>Then paste the secret key in environment file</li>
+      <li>Then declare a variable name stipe in ts file</li>
+      <li>
+        Create the form in html file with id or template reference using div
+        rather than input
+      </li>
+      <li>
+        On ngAfterViewInit lifecycle hook declare the card styling options, and
+        assign the secret key to stripe.
+      </li>
+      <li>Declare stripe elements</li>
+      <li>
+        Then create the card with create function with pass card as stripe card
+        variable and mount it.
+      </li>
+      <li>
+        Then on submit call the createToken method to create the token and the
+        result is an object.
+      </li>
+      <li>createToken method is a promise with either resolve or reject</li>
+      <li>
+        on resolve onsuccess function is called and on reject onerror method is
+        called.
+      </li>
+      <li>
+        For further reference click here:-
+        <a
+          href="https://stripe.com/docs/js/tokens_sources/create_token?type=cardElement"
+          target="_blank"
+          >Stripe</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div class="content-wrapper w-50 m-auto">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="d-flex justify-content-between">
+          <h5 class="text-right">Single Card Form</h5>
+          <div class="form-check form-switch ml-1">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              (change)="ontoggleForm($event)"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h5>Multiple Card Form</h5>
+      </div>
+    </div>
+    <div class="content-wrapper m-auto">
+      <!-- <div class="row" *ngIf="!toggleForm; else multipleCardForm"> -->
+      <div class="row">
+        <app-single-card
+          *ngIf="!toggleForm; else multipleCardForm"
+        ></app-single-card>
+        <ng-template #multipleCardForm>
+          <app-multiple-card></app-multiple-card>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
